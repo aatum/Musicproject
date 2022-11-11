@@ -1,38 +1,59 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Book List</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<title>Song List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/songlist">Songlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add">Add song</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/playlist">Playlists</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
-<h2>Edit book</h2>
+<h2>Edit Song</h2>
 <div class="col-md-4">
 <form th:object="${song}" th:action="@{/save}" action="#" method="post">
 <input type="hidden" id="id" th:field="*{id}" class="form-control"/>
 <label for="song">Song</label>
-<input type="text" id="title" th:field="*{title}" class="form-control"/>
+<input type="text" id="name" th:field="*{name}" class="form-control"/>
 <div style="clear: both; display: block; height: 10px;"></div>
 <label for="artist">Artist</label>
-<input type="text" id="author" th:field="*{author}" class="form-control"/>
+<input type="text" id="artist" th:field="*{artist}" class="form-control"/>
 <div style="clear: both; display: block; height: 10px;"></div>
 <label for="album">Album</label>
-<input type="text" id="year" th:field="*{year}" class="form-control"/>
+<input type="text" id="album" th:field="*{album}" class="form-control"/>
 <div style="clear: both; display: block; height: 10px;"></div>
 <label for="year">Publishing year</label>
-<input type="text" id="isbn" th:field="*{isbn}" class="form-control"/>
+<input type="text" id="year" th:field="*{year}" class="form-control"/>
 <div style="clear: both; display: block; height: 10px;"></div>
 <label for="genrelist">Genre</label>
-<input type="text" id="price" th:field="*{price}" class="form-control"/>
-<div style="clear: both; display: block; height: 10px;"></div>
-<input type="submit" class="btn btn-primary"  value="Save">
-<select id="genrelist" th:field="*{category}" class="form-control">
+<select id="genrelist" th:field="*{genre}" class="form-control">
 <option th:each="genre: ${genres}" th:value="${genre.genreid}" th:text="${genre.genreName}"></option>
 </select>
 <div style="clear: both; display: block; height: 10px;"></div>
+<input type="submit" class="btn btn-primary"  value="Save">
+<div style="clear: both; display: block; height: 10px;"></div>
 </form>
 </div>
-
 </div>
 </body>
 </html>

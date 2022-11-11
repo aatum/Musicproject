@@ -10,6 +10,8 @@ import ch.qos.logback.classic.Logger;
 import hh.swd20.musicproject.domain.Genre;
 import hh.swd20.musicproject.domain.GenreRepository;
 import hh.swd20.musicproject.domain.MusicRepository;
+import hh.swd20.musicproject.domain.Playlist;
+import hh.swd20.musicproject.domain.PlaylistRepository;
 import hh.swd20.musicproject.domain.Song;
 
 @SpringBootApplication
@@ -21,34 +23,56 @@ public class MusicprojectApplication {
 	}
 
 	@Bean
-	public CommandLineRunner SongDemo(MusicRepository srepository, GenreRepository grepository) {
+	public CommandLineRunner SongDemo(MusicRepository srepository, GenreRepository grepository,
+			PlaylistRepository prepository) {
 		return (args) -> {
 			log.info("save new songs");
 			log.info("save new genres");
+			log.info("save new playlists");
 
-			// tallennetaan genret repoon
+			// saving playlists to repo
 
-			grepository.save(new Genre("Psychedelic rock"));
-			grepository.save(new Genre("Alternative rock"));
-			grepository.save(new Genre("Finnish music"));
-			grepository.save(new Genre("Jungle"));
-			grepository.save(new Genre("Drum and bass"));
-			grepository.save(new Genre("Techno"));
-			grepository.save(new Genre("Ambient"));
-			grepository.save(new Genre("Electro"));
-			grepository.save(new Genre("Breakbeat"));
-			grepository.save(new Genre("House"));
-			grepository.save(new Genre("Hip hop"));
-			grepository.save(new Genre("Pop"));
+			Playlist playlist1 = new Playlist("Electronic music");
+			prepository.save(playlist1);
+			Playlist playlist3 = new Playlist("Hip hop music");
+			prepository.save(playlist3);
+			Playlist playlist4 = new Playlist("Pop music");
+			prepository.save(playlist4);
+			Playlist playlist5 = new Playlist("Rock music");
+			prepository.save(playlist5);
 
-			// tallenetaan laulut repoon
+			// saving genres to repo
 
-			srepository.save(new Song("Numb", "Linkin Park", "Meteora", 2003,
-					grepository.findBygenreName("Alternative rock").get(0)));
-			srepository.save(new Song("#3", "Aphex Twin", "Selected Ambient Works Volume II", 1994,
-					grepository.findBygenreName("Ambient").get(0)));
-			srepository.save(new Song("Archangel", "Burial", "Untrue", 2007,
-					grepository.findBygenreName("Alternative rock").get(0)));
+			Genre genre1 = new Genre("Alternative rock");
+			grepository.save(genre1);
+			Genre genre2 = new Genre("Ambient");
+			grepository.save(genre2);
+			Genre genre3 = new Genre("Breakbeat");
+			grepository.save(genre3);
+			Genre genre4 = new Genre("Drum and bass");
+			grepository.save(genre4);
+			Genre genre5 = new Genre("Electro");
+			grepository.save(genre5);
+			Genre genre6 = new Genre("Hiphop");
+			grepository.save(genre6);
+			Genre genre7 = new Genre("House");
+			grepository.save(genre7);
+			Genre genre8 = new Genre("Jungle");
+			grepository.save(genre8);
+			Genre genre9 = new Genre("Pop");
+			grepository.save(genre9);
+			Genre genre10 = new Genre("Psychedelic rock");
+			grepository.save(genre10);
+			Genre genre11 = new Genre("Techno");
+			grepository.save(genre11);
+
+			// saving songs with genres and playlists to repo
+
+			srepository.save(new Song("Numb", "Linkin Park", "Meteora", 2003, genre1, playlist4));
+			srepository.save(new Song("#3", "Aphex Twin", "Selected Ambient Works Volume II", 1994, genre2, playlist1));
+			srepository.save(new Song("Old Wives Tale", "Kessler", "Ambivalent", 2021, genre3, playlist1));
+			srepository.save(new Song("Archangel", "Burial", "Untrue", 2007, genre2, playlist1));
+
 			log.info("fetch all songs");
 			for (Song song : srepository.findAll()) {
 				log.info(song.toString());

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,11 +17,11 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
-	// attribuutit
+	// attributes
 
 	private Long id;
-	private String name;
-	private String artist;
+	@NotBlank(message = "Name and artist are mandatory")
+	private String name, artist;
 	private String album;
 	@Column(name = "publishing_year")
 	private int year;
@@ -30,24 +31,28 @@ public class Song {
 	@JoinColumn(name = "genreid")
 	private Genre genre;
 
+	@ManyToOne
+	@JsonIgnoreProperties("songs")
+	@JoinColumn(name = "playlistid")
+	private Playlist playlist;
+
 	public Song() {
 
 	}
 
-	// konstruktorit
+	// parameterized constructor
 
-	// parametrillinen
-
-	public Song(String name, String artist, String album, int year, Genre genre) {
+	public Song(String name, String artist, String album, int year, Genre genre, Playlist playlist) {
 		super();
 		this.name = name;
 		this.artist = artist;
 		this.album = album;
 		this.year = year;
 		this.genre = genre;
+		this.playlist = playlist;
 	}
 
-	// getterit&setterit
+	// getters&setters
 
 	public Long getId() {
 		return id;
@@ -97,11 +102,19 @@ public class Song {
 		this.genre = genre;
 	}
 
+	public Playlist getPlaylist() {
+		return playlist;
+	}
+
+	public void setPlaylist(Playlist playlist) {
+		this.playlist = playlist;
+	}
+
 	@Override
 	public String toString() {
-		if (this.genre != null)
+		if (this.genre != null && this.playlist != null)
 			return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", album=" + album + ", year=" + year
-					+ " genre =" + this.getGenre() + "]";
+					+ " genre =" + this.getGenre() + "playlist =" + this.getPlaylist() + "]";
 		else
 			return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", album=" + album + ", year=" + year
 					+ "]";

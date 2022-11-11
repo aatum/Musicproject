@@ -1,11 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Songs</title>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+<title>Home</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,40 +20,12 @@
       <li class="nav-item">
         <a class="nav-link" href="/add">Add song</a>
       </li>
-            <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" href="/playlist">Playlists</a>
       </li>
     </ul>
   </div>
 </nav>
-<div class="col-md-4">
-<h1>List of songs</h1>
-</div>
-<table class="table table-sm">
-
-<tr>
-  <thead class="thead-light">
-<th>Song</th>
-<th>Artist</th>
-<th>Album</th>
-<th>Publishing year</th>
-<th>Genre</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-<tr th:each="song: ${songs}">
-<td th:text="${song.name}"></td>
-<td th:text="${song.artist}"></td>
-<td th:text="${song.album}"></td>
-<td th:text="${song.year}"></td>
-<td th:text="${song.genre.genreName}"></td>
-
-<td><a th:href="@{/addtoplaylist/{id}(id=${song.id})}" class="btn btn-success">Add to playlist</a></td><td><a th:href="@{/delete/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td><td><a th:href="@{/edit/{id}(id=${song.id})}" class="btn btn-info">Edit</a></td>
-
-</tr>
-</table>
-<a href="/add" class="btn btn-outline-success">Add new song</a>
-
+<h1>Welcome to use the music database! ♫</h1>
 </body>
 </html>

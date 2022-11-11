@@ -17,7 +17,7 @@ public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
-	// attribuutit
+	// attributes
 	private Long genreid;
 	private String genreName;
 
@@ -28,13 +28,13 @@ public class Genre {
 	public Genre() {
 	}
 
-	// parametrillinen konstruktori
+	// parameterized constructor
 	public Genre(String genreName) {
 		super();
 		this.genreName = genreName;
 	}
 
-	// getterit&setterit
+	// getters&setters
 
 	public Long getGenreid() {
 		return genreid;
