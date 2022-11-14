@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -103,6 +104,7 @@ public class MusicController {
 	}
 
 	// add song to playlist
+	@Secured("ADMIN")
 	@RequestMapping("/addtoplaylist/{id}")
 	public String addtoPlaylist(@PathVariable("id") Long songId, Model model) {
 		model.addAttribute("song", repository.findById(songId));
@@ -122,7 +124,7 @@ public class MusicController {
 		// nykyiset tiedot ja sitten
 		// päivitä tietokannasta haetun laulu-olion playlist-tieto lomakkeelta tulleen
 		// laulun playlist-tiedolla
-		repository.save(dbSong);
+		// repository.save(dbSong);
 		return "redirect:../playlist";
 	}
 

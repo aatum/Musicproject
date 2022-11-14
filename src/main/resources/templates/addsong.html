@@ -23,7 +23,10 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/playlist">Playlists</a>
-      </li>
+      </li>     
+     <li class="nav-item">
+			<li sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout">Log out</a>
+		</li>
     </ul>
   </div>
 </nav>

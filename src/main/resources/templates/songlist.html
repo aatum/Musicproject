@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>Songs</title>
 
@@ -27,11 +27,21 @@
             <li class="nav-item">
         <a class="nav-link" href="/playlist">Playlists</a>
       </li>
+        <li class="nav-item">
+			<li sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout">Log out</a>
+		</li>
+	    <li class="nav-item">
+			<li sec:authorize="isAnonymous()"><a class="nav-link" href="/login">Log in</a>
+		</li>
     </ul>
   </div>
 </nav>
 <div class="col-md-4">
 <h1>List of songs</h1>
+<h3 sec:authorize="isAuthenticated()" th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+</div>
+<div class="col-md-4">
 </div>
 <table class="table table-sm">
 
@@ -42,6 +52,8 @@
 <th>Album</th>
 <th>Publishing year</th>
 <th>Genre</th>
+<th sec:authorize="hasRole('ADMIN')"> </th>
+<th></th>
 <th></th>
 <th></th>
 <th></th>
@@ -53,11 +65,13 @@
 <td th:text="${song.year}"></td>
 <td th:text="${song.genre.genreName}"></td>
 
-<td><a th:href="@{/addtoplaylist/{id}(id=${song.id})}" class="btn btn-success">Add to playlist</a></td><td><a th:href="@{/delete/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td><td><a th:href="@{/edit/{id}(id=${song.id})}" class="btn btn-info">Edit</a></td>
+<td><td sec:authorize="hasRole('ADMIN')"><a th:href="@{/addtoplaylist/{id}(id=${song.id})}" class="btn btn-success">Add to playlist</a></td>
+<td><td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td>
+<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/edit/{id}(id=${song.id})}" class="btn btn-info">Edit</a></td>
 
 </tr>
 </table>
-<a href="/add" class="btn btn-outline-success">Add new song</a>
+<td sec:authorize="hasRole('ADMIN')"><a href="/add" class="btn btn-outline-success">Add new song</a>
 
 </body>
 </html>
