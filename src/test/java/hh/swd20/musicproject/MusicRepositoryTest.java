@@ -21,7 +21,7 @@ public class MusicRepositoryTest {
 	@Autowired
 	private MusicRepository repository;
 
-	@Test // testataan BookRepositoryn findByName()-metodia
+	@Test // testing BookRepositorys findByName()-method
 	public void findByNameShouldReturnArtistName() {
 		List<Song> songs = repository.findByName("Archangel");
 
