@@ -22,7 +22,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/home", "/songlist").permitAll() // a guest can use these pages
+		http.authorizeRequests().antMatchers("/home", "/songlist", "/playlist").permitAll() // a guest can use these
+																							// pages
 				.and().authorizeRequests().anyRequest().authenticated().and().formLogin()
 				.defaultSuccessUrl("/songlist", true).permitAll().and().logout().permitAll();
 	}

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -76,6 +75,7 @@ public class MusicController {
 	public String addSong(Model model) {
 		model.addAttribute("song", new Song());
 		model.addAttribute("genres", grepository.findAll());
+		model.addAttribute("playlists", prepository.findAll());
 		return "addsong";
 	}
 
@@ -87,45 +87,19 @@ public class MusicController {
 	}
 
 	// edit songform
-
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editSong(@PathVariable("id") Long songId, Model model) {
 		model.addAttribute("song", repository.findById(songId));
 		model.addAttribute("genres", grepository.findAll());
+		model.addAttribute("playlists", prepository.findAll());
 		return "editsong";
 	}
 
 	// go to playlist menu
-
 	@RequestMapping(value = "/playlist")
 	public String getplaylists(Model model) {
 		model.addAttribute("songs", repository.findAll());
 		return "playlist";
-	}
-
-	// add song to playlist
-	@Secured("ADMIN")
-	@RequestMapping("/addtoplaylist/{id}")
-	public String addtoPlaylist(@PathVariable("id") Long songId, Model model) {
-		model.addAttribute("song", repository.findById(songId));
-		model.addAttribute("playlists", prepository.findAll());
-		return "addsongtoplaylist";
-	}
-
-	// save to playlist
-	@RequestMapping(value = "/savetoplaylist", method = RequestMethod.GET)
-	public String saveToPlaylist(Song formSong) {
-		Optional<Song> dbSong = repository.findById(formSong.getId());
-//		System.out.print("jee");
-		// eli pitää hakee idl se biisi ja päivittää sen soittolistatietoon mihi listaa
-		// laitetaa?
-		// atm redirectaa addtoplaylist/savetoplaylist
-		// ennen savea hae tietokannasta lomakkeelta tulleen songIdn avulla laulun
-		// nykyiset tiedot ja sitten
-		// päivitä tietokannasta haetun laulu-olion playlist-tieto lomakkeelta tulleen
-		// laulun playlist-tiedolla
-		// repository.save(dbSong);
-		return "redirect:../playlist";
 	}
 
 	// errorpage

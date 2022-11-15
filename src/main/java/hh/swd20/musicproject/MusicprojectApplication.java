@@ -34,12 +34,12 @@ public class MusicprojectApplication {
 
 			Playlist playlist1 = new Playlist("Electronic music");
 			prepository.save(playlist1);
-			Playlist playlist3 = new Playlist("Hip hop music");
+			Playlist playlist2 = new Playlist("Hip hop music");
+			prepository.save(playlist2);
+			Playlist playlist3 = new Playlist("Pop music");
 			prepository.save(playlist3);
-			Playlist playlist4 = new Playlist("Pop music");
+			Playlist playlist4 = new Playlist("Rock music");
 			prepository.save(playlist4);
-			Playlist playlist5 = new Playlist("Rock music");
-			prepository.save(playlist5);
 
 			// saving genres to repo
 
@@ -72,6 +72,16 @@ public class MusicprojectApplication {
 			srepository.save(new Song("#3", "Aphex Twin", "Selected Ambient Works Volume II", 1994, genre2, playlist1));
 			srepository.save(new Song("Old Wives Tale", "Kessler", "Ambivalent", 2021, genre3, playlist1));
 			srepository.save(new Song("Archangel", "Burial", "Untrue", 2007, genre2, playlist1));
+			srepository.save(new Song("Starman", "David Bowie", "Ziggy Stardust", 1972, genre9, playlist3));
+			srepository.save(new Song("Let It Happen", "Tame Impala", "Currents", 2015, genre10, playlist4));
+			srepository.save(new Song("SAD!", "XXXTentacion", "?", 2018, genre6, playlist2));
+			srepository.save(new Song("California Love", "2Pac", "All Eyez On Me", 1995, genre6, playlist2));
+			srepository.save(new Song("Who Started Jungle", "Denham Audio", "To The Core", 2018, genre8, playlist1));
+			srepository
+					.save(new Song("Lost & Not Found", "Chase & Status", "Brand New Machine", 2013, genre4, playlist1));
+			srepository.save(new Song("Still D.R.E.", "Dr Dre", "2001", 1999, genre6, playlist2));
+			srepository.save(new Song("Feel Good Inc.", "Gorillaz", "Demon Days", 2005, genre1, playlist4));
+			srepository.save(new Song("Light My Fire", "The Doors", "The Doors", 1967, genre10, playlist3));
 
 			log.info("fetch all songs");
 			for (Song song : srepository.findAll()) {

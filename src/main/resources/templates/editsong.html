@@ -20,11 +20,14 @@
         <a class="nav-link" href="/songlist">Songlist</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/playlist">Playlists</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="/add">Add song</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/playlist">Playlists</a>
-      </li>
+		<li sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout">Log out</a>
+	  </li>
     </ul>
   </div>
 </nav>
@@ -48,6 +51,9 @@
 <label for="genrelist">Genre</label>
 <select id="genrelist" th:field="*{genre}" class="form-control">
 <option th:each="genre: ${genres}" th:value="${genre.genreid}" th:text="${genre.genreName}"></option>
+</select><label for="playlist">Playlist</label>
+<select id="playlist" th:field="*{playlist}" class="form-control">
+<option th:each="playlist: ${playlists}" th:value="${playlist.playlistid}" th:text="${playlist.playlistName}"></option>
 </select>
 <div style="clear: both; display: block; height: 10px;"></div>
 <input type="submit" class="btn btn-primary"  value="Save">
